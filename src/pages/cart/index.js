@@ -32,8 +32,4 @@ export default Cart;
 
 
 
-
-                        // <button onClick={this.props.remove(i)}>
-                        //     X
-                        // </button> () => this.remove(i)
                       
