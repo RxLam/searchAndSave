@@ -1,3 +1,47 @@
-.active{
-    color: red;
+header{
+  margin-top: 56px;
+  margin-left: 13px;
+  margin-bottom: 24px;
 }
+
+.active {
+  color: red;
+	border-top: 2px solid red;
+  text-decoration: none;
+}
+
+.not_active{
+	color: black;
+  text-decoration: none;
+}
+
+ul {
+  padding: 3px;
+  width: 100%;
+  display: inline;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  display: inline-block;
+  width: auto;
+  height: 37px;
+  margin-right: 0.625%;
+  text-align: center;
+  line-height: 2.4;
+}
+
+li:first-child a {
+  margin-right: 4px;
+}
+
+a:hover {     
+  background: #f0f0f0;
+}
+
+a:active {
+  background: #bebebe;
+}
+
+

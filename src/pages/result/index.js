@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import styles from './index.module.css';
 
 class Result extends React.Component{
   constructor(props) {
@@ -16,26 +17,36 @@ class Result extends React.Component{
 
     render(){
         if(this.props.data === null) return false
-    	const {value, data} = this.props.data
+    	const {value, data} = this.props.data     
         let btn = this.state.btnToggle ?
-                <Button variant="danger" onClick={() => {this.toggleBtn(); this.props.saveFunction(data)}}>
+                <Button className="btn btn-danger btn-lg" onClick={() => {this.toggleBtn(); this.props.saveFunction(data)}}>
                     Сохранить
                 </Button> :
-                <Button variant="light" disabled={true}>
-                    Сохраненно
+                <Button className="btn btn-light btn-lg" disabled={true}>
+                    Сохранено
                 </Button>                            
-        return (
+        return (          
             <div>
-            <div>
-                <hr/>
-                <h3>{value}</h3>
-                <p><strong>Юридический адрес </strong>{data.address.value}</p>
-                <p><strong>Генеральный директор </strong>{data.management.name}</p>
-                <p><strong>ИНН </strong>{data.inn}</p>
-                <p><strong>КПП </strong>{data.kpp}</p> 
-                <p><strong>ОГРН </strong>{data.ogrn}</p>                                                         
-            </div>
-            <div>{btn}</div>
+                <div>
+                    <h3 className={styles.title}>{value}</h3>
+                    <hr/>
+                    <div className={styles.address}>
+                        <p><strong>Юридический адрес</strong></p>
+                        <p>{data.address.value}</p>
+                    </div>
+                    <div className={styles.management}>
+                        <p><strong>Генеральный директор</strong></p>
+                        <p>{data.management.name}</p>
+                    </div>
+                    <div className={styles.block}>
+                        <div className={styles.numbers}>
+                            <p><strong>ИНН</strong> {data.inn}</p>
+                            <p><strong>КПП</strong> {data.kpp}</p> 
+                            <p><strong>ОГРН</strong> {data.ogrn}</p> 
+                        </div>
+                    </div>                                                        
+                </div>
+                <div className={styles.btn}>{btn}</div>
             </div>
         )
     }

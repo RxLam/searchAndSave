@@ -43,37 +43,25 @@ class App extends React.Component{
                 <Router>
                     <header>
                         <div className="container">
-                            <hr/>
-                            <div className="row justify-content-between">
-                                <div>
-                                    <div>
-                                    <h1>Мои организации</h1>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
+                            <h1>Мои организации</h1>
                         </div>
                     </header>
                     <div className="container">
-                        <div>
-                            <Nav fill variant="tabs">
-                              <Nav.Item>
-                                    <Nav.Link><NavLink to={routesMap.home} exact activeClassName={styles.active}>
-                                    Новая организация
-                                    </NavLink></Nav.Link>
-                              </Nav.Item>
-                              <Nav.Item>
-                                    <Nav.Link><NavLink to={routesMap.cart} activeClassName={styles.active}>
-                                    Сохраненные организации
-                                    </NavLink></Nav.Link>
-                              </Nav.Item>
-                            </Nav>   
-                            <div className="col col-9">
+                            <ul>
+							  <NavLink className={styles.not_active} to={routesMap.home} exact activeClassName={styles.active}>
+							  		Новая организация
+							 	</NavLink>
+							</ul>
+                            <ul>
+							  <NavLink className={styles.not_active} to={routesMap.cart} activeClassName={styles.active}>
+							  		Сохраненные организации
+							  	</NavLink>
+							</ul>                           
+                            <div>
                                 <Switch>
                                     {routesComponents}
                                 </Switch>
                             </div>
-                        </div>
                     </div>                
                 </Router>
         )
@@ -81,6 +69,14 @@ class App extends React.Component{
 }
 
 export default App;
+
+
+
+
+
+
+
+
 
 
 

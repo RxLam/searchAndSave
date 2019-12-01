@@ -5,7 +5,8 @@ import axios from 'axios';
 import themeable from 'react-themeable';
 import theme from './themeSuggects.css';
 import { Button } from 'react-bootstrap';
-import Result from '~p/result'
+import Result from '~p/result';
+import Plus from './Plus.png'
 
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
@@ -21,10 +22,10 @@ const getSuggestionValue = suggestion => suggestion.value;
 
 const renderSuggestion = suggestion => (
 <div>
-  <div>{'Название ' + suggestion.value + ' '}</div>
+  <div className={styles.title}>{suggestion.value}</div>
   <div>
-    {'ИНН ' + suggestion.data.inn + ' '}
-    {'Адрес ' + suggestion.data.address.value}
+    {suggestion.data.inn + ' '}
+    {suggestion.data.address.value}
   </div>
 </div>
 );
@@ -85,25 +86,49 @@ class Search extends React.Component {
     const { value, suggestions, selectedSuggestion } = this.state;
 
     const inputProps = {
-      placeholder: 'Введите название в свободной форме',
+      placeholder: 'Введите название, ИНН или адрес организации',
       value, 
       onChange: this.onChange,
     };
 
+    let page = this.state.selectedSuggestion === null ? 
+                        <div>
+                          <p className={styles.head}>Организация или ИП</p>
+                          <Autosuggest
+                            suggestions={suggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            getSuggestionValue={getSuggestionValue}
+                            renderSuggestion={renderSuggestion}
+                            inputProps={inputProps}
+                            onSuggestionSelected={this.onSuggestionSelected}
+                          />
+                          <div>
+                            <img className={styles.img} src={Plus}/>
+                            <p className={styles.p}>Для добавления новой организации введите ее название, ИНН или адрес.</p>
+                          </div>
+                        </div> :
+                        <div>
+                        <div>
+                          <div className={styles.head}><p>Организация или ИП</p></div>
+                          <Autosuggest
+                            suggestions={suggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            getSuggestionValue={getSuggestionValue}
+                            renderSuggestion={renderSuggestion}
+                            inputProps={inputProps}
+                            onSuggestionSelected={this.onSuggestionSelected}
+                          />
+                        </div>
+                          <div>
+                             <Result data={this.state.selectedSuggestion} saveFunction={this.props.saveFunction}/>                             
+                          </div>
+                        </div>                 
+
     return (
       <div>
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={inputProps}
-        onSuggestionSelected={this.onSuggestionSelected}
-      />
-      <div>
-         <Result data={this.state.selectedSuggestion} saveFunction={this.props.saveFunction}/>                             
-      </div>
+          {page}
       </div>
     );
   }
