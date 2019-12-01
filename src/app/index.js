@@ -48,15 +48,15 @@ class App extends React.Component{
                     </header>
                     <div className="container">
                             <ul>
-							  <NavLink className={styles.not_active} to={routesMap.home} exact activeClassName={styles.active}>
-							  		Новая организация
-							 	</NavLink>
-							</ul>
+				<NavLink className={styles.not_active} to={routesMap.home} exact activeClassName={styles.active}>
+					Новая организация
+				</NavLink>
+			    </ul>
                             <ul>
-							  <NavLink className={styles.not_active} to={routesMap.cart} activeClassName={styles.active}>
-							  		Сохраненные организации
-							  	</NavLink>
-							</ul>                           
+				<NavLink className={styles.not_active} to={routesMap.cart} activeClassName={styles.active}>
+					Сохраненные организации
+				</NavLink>
+			    </ul>                           
                             <div>
                                 <Switch>
                                     {routesComponents}
